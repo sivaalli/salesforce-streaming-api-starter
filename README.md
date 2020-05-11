@@ -1,12 +1,7 @@
-package com.salesforce.streaming.api.main;
+# salesforce-streaming-api-starter
+Pretty much under development. But after completed a interested listener can subscribe by just adding this code:
 
-import com.salesforce.streaming.api.annotation.ChannelListener;
-import org.cometd.bayeux.Channel;
-import org.cometd.bayeux.Message;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
-
+```java
 @Component
 public class MyListener {
 
