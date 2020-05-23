@@ -5,14 +5,15 @@ import com.salesforce.streaming.api.auth.Authenticator;
 import com.salesforce.streaming.api.auth.SalesforceAuthenticator;
 import com.salesforce.streaming.api.listeners.SimpleListener;
 import org.cometd.bayeux.client.ClientSessionChannel;
+import org.cometd.client.BayeuxClient;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@ConditionalOnProperty("streaming.api.creds.clientId")
+@ConditionalOnClass(BayeuxClient.class)
 @Configuration(proxyBeanMethods = false) // disable cglib proxying
 @EnableConfigurationProperties(StreamingApiProperties.class)
 public class SalesforceStreamingApiConfiguration {

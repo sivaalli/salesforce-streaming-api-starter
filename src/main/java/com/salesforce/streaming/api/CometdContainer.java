@@ -1,6 +1,7 @@
 package com.salesforce.streaming.api;
 
 import com.google.common.base.Preconditions;
+import com.salesforce.streaming.api.extension.LoggingExtension;
 import org.cometd.bayeux.Channel;
 import org.cometd.bayeux.client.ClientSessionChannel;
 import org.cometd.client.BayeuxClient;
@@ -48,9 +49,7 @@ public class CometdContainer implements SmartLifecycle {
     }
 
     private static void configureMetaChannelListeners(BayeuxClient client) {
-//        client.getChannel(Channel.META_CONNECT).addListener((ClientSessionChannel.MessageListener) (channel, message) -> {
-//        });
-        // todo add listeners to all meta channels for debugging. on debug log level.
+        client.getChannel(Channel.META_CONNECT).addListener((ClientSessionChannel.MessageListener) (channel, message) -> {  });
     }
 
     @Override
@@ -100,6 +99,7 @@ public class CometdContainer implements SmartLifecycle {
         };
 
         cometd = new BayeuxClient(config.getBaseUri(), clientTransport);
+        cometd.addExtension(new LoggingExtension());
         isRunning = true;
 
         configureMetaChannelListeners(cometd);
@@ -136,5 +136,4 @@ public class CometdContainer implements SmartLifecycle {
     public boolean isAutoStartup() {
         return true;
     }
-
 }
